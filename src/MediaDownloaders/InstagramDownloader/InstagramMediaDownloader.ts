@@ -1,4 +1,5 @@
 import Chrome from "selenium-webdriver/chrome";
+import Firefox from "selenium-webdriver/firefox"
 import { MediaDownloader } from "../MediaDownloader";
 import { Builder, By } from "selenium-webdriver";
 
@@ -39,9 +40,10 @@ export class InstagramMediaDownloader implements MediaDownloader {
     }
 
     async getReelVideoUrl(url: string): Promise<string> {
-        const options = new Chrome.Options();
-        let driver = await new Builder().forBrowser('chrome')
-            .setChromeOptions(options.addArguments('--headless=new'))
+        const options = new Firefox.Options();
+        // ChromiumWebDriver.createSession
+        let driver = await new Builder().forBrowser('firefox')
+            .setFirefoxOptions(options.addArguments('--headless'))
             .build();
 
         try {
